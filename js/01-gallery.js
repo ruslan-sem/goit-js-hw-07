@@ -23,13 +23,15 @@ gallery.addEventListener('click', onClick);
 let instance;
 function onClick(event) {
   event.preventDefault();
-  const src = event.target.dataset.source;
-  const desc = event.target.alt;
-  instance = basicLightbox.create(`<img src="${src}" alt="${desc}">`, {
-    onShow: onShowModal,
-    onClose: onCloseModal,
-  });
-  instance.show();
+  if (event.target.tagName === 'IMG') {
+    const src = event.target.dataset.source;
+    const desc = event.target.alt;
+    instance = basicLightbox.create(`<img src="${src}" alt="${desc}">`, {
+      onShow: onShowModal,
+      onClose: onCloseModal,
+    });
+    instance.show();
+  }
 }
 function onShowModal() {
   document.addEventListener('keydown', onEscape);
